@@ -27,15 +27,9 @@ computedStyles(document.querySelector('#node')) // returns computed styles as an
 MIT © [J. Harshbarger](http://github.com/Hypercubed)
 
 [npm-url]: https://npmjs.org/package/computed-styles
-[npm-image]: https://img.shields.io/npm/v/computed-style.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/computed-styles.svg?style=flat-square
 
 [travis-url]: https://travis-ci.org/Hypercubed/computed-styles
-[travis-image]: https://img.shields.io/travis/Hypercubed/computed-style.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/Hypercubed/computed-styles.svg?style=flat-square
 
-[coveralls-url]: https://coveralls.io/r/Hypercubed/computed-styles
-[coveralls-image]: https://img.shields.io/coveralls/Hypercubed/computed-style.svg?style=flat-square
-
-[depstat-url]: https://david-dm.org/Hypercubed/computed-styles
-[depstat-image]: https://david-dm.org/Hypercubed/computed-style.svg?style=flat-square
-
-[download-badge]: http://img.shields.io/npm/dm/computed-style.svg?style=flat-square
+[download-badge]: http://img.shields.io/npm/dm/computed-styles.svg?style=flat-square
