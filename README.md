@@ -2,8 +2,6 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-[![Coveralls Status][coveralls-image]][coveralls-url]
-[![Dependency Status][depstat-image]][depstat-url]
 [![Downloads][download-badge]][npm-url]
 
 > Get the computed styles of a DOM element in a cross browser consistent manner
