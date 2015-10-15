@@ -1,0 +1,49 @@
+{
+  "name": "computed-styles",
+  "version": "1.0.0",
+  "description": "Get the computed styles of a DOM element in a cross browser consistent manner",
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "lint": "eslint src test",
+    "check": "npm run lint -s && dependency-check package.json --entry src",
+    "watch": "watch 'npm run build' src test",
+    "test": "babel-node test/index.js | tspec",
+    "prebuild": "npm run check -s",
+    "build": "babel --optional runtime src -d dist",
+    "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hypercubed/computed-styles.git"
+  },
+  "keywords": [
+    "browser",
+    "css",
+    "getComputedStyles"
+  ],
+  "author": "J. Harshbarger <hypercubed@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hypercubed/computed-styles/issues"
+  },
+  "homepage": "https://github.com/Hypercubed/computed-styles#readme",
+  "devDependencies": {
+    "babel": "*",
+    "babel-eslint": "*",
+    "dependency-check": "*",
+    "dmd": "^1.2.0",
+    "eslint": "*",
+    "jsdoc-parse": "^1.1.1",
+    "jsdom": "^3.1.2",
+    "tap-spec": "*",
+    "tape": "*",
+    "watch": "*"
+  },
+  "dependencies": {
+    "babel-runtime": "*"
+  }
+}
