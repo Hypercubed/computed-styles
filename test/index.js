@@ -31,7 +31,7 @@ test('computedStyles', (t) => {
   t.equal(styles['font-family'], '\'Helvetica Neue\', Helvetica, Arial, sans-serif', 'css');
 
   t.throws(function() {
-    computedStyles(document.querySelector('#unknown'))
+    computedStyles(document.querySelector('#unknown'));
   }, null, 'Throws if unexpected type');
 
 });

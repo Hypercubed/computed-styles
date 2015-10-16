@@ -13,7 +13,7 @@
     "watch": "watch 'npm run build' src test",
     "test": "babel-node test/index.js | tspec",
     "prebuild": "npm run check -s",
-    "build": "babel --optional runtime src -d dist",
+    "build": "babel src -d dist",
     "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md"
   },
   "repository": {
@@ -43,7 +43,5 @@
     "tape": "*",
     "watch": "*"
   },
-  "dependencies": {
-    "babel-runtime": "*"
-  }
+  "dependencies": {}
 }

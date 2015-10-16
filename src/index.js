@@ -27,7 +27,7 @@ function convertComputedStyles(computed) {
 */
 function computedStyles(node) {
   if (!isNode(node)) {
-    throw new Error("parameter 1 is not of type 'Element'");
+    throw new Error('parameter 1 is not of type \'Element\'');
   }
   // adapted from https://github.com/angular/angular.js/issues/2866#issuecomment-31012434
   if (isDefined(node.currentStyle)) {  //for old IE
