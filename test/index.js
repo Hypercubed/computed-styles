@@ -1,5 +1,5 @@
 import test from 'tape';
-import computedStyles from '../src/';
+import computedStyles from '../dist/';
 import jsdom from 'jsdom';
 
 const markup = `
