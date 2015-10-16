@@ -8,13 +8,14 @@
     "src/"
   ],
   "scripts": {
+    "compile": "babel src -d dist",
+    "build": "npm run compile",
     "lint": "eslint src test",
     "check": "npm run lint -s && dependency-check package.json --entry src",
     "watch": "watch 'npm run build' src test",
-    "test": "babel-node test/index.js | tspec",
-    "prebuild": "npm run check -s",
-    "build": "babel src -d dist",
-    "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md"
+    "test": "babel-node test/jsdom-index.js | tspec",
+    "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md",
+    "zuul": "zuul --local 9966 --ui tape -- test/index.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "babel": "*",
     "babel-eslint": "*",
+    "babelify": "^6.3.0",
     "dependency-check": "*",
     "dmd": "^1.2.0",
     "eslint": "*",
@@ -41,7 +43,8 @@
     "jsdom": "^3.1.2",
     "tap-spec": "*",
     "tape": "*",
-    "watch": "*"
+    "watch": "*",
+    "zuul": "^3.6.0"
   },
   "dependencies": {}
 }

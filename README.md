@@ -20,6 +20,8 @@ import computedStyles from 'computed-styles';
 computedStyles(document.querySelector('#node')) // returns computed styles as an object
 ```
 
+All see [API](API.md)
+
 ## License
 
 MIT © [J. Harshbarger](http://github.com/Hypercubed)

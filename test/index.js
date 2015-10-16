@@ -1,34 +1,22 @@
 import test from 'tape';
-import computedStyles from '../dist/';
-import jsdom from 'jsdom';
+import computedStyles from '../src/';
 
-const markup = `
-  <!DOCTYPE html>
-  <html>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <head>
-      <style>
-        div {
-          font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif;
-        }
-      </style>
-    </head>
-    <body id="abody">
-      <div id="node" style="color: red;"></div>
-    </body>
-  </html>`;
-
-const document = jsdom.jsdom(markup);
-const window = global.window = document.parentWindow;
-const node = document.querySelector('#node');
+document.body.innerHTML += `
+    <style>
+      div {
+        font-family: sans-serif;
+      }
+    </style>
+    <div id="node" style="color: rgb(255, 0, 0);"></div>`;
 
 test('computedStyles', (t) => {
   t.plan(3);
 
+  const node = document.querySelector('#node');
   const styles = computedStyles(node);
 
-  t.equal(styles.color, 'red', 'inline');
-  t.equal(styles['font-family'], '\'Helvetica Neue\', Helvetica, Arial, sans-serif', 'css');
+  t.equal(styles.color, 'rgb(255, 0, 0)', 'inline');
+  t.equal(styles['font-family'], 'sans-serif', 'css');
 
   t.throws(function() {
     computedStyles(document.querySelector('#unknown'));
