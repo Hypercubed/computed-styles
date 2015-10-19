@@ -25,7 +25,8 @@
   "keywords": [
     "browser",
     "css",
-    "getComputedStyles"
+    "getComputedStyles",
+    "dom"
   ],
   "author": "J. Harshbarger <hypercubed@gmail.com>",
   "license": "MIT",
