@@ -1,9 +1,9 @@
 {
   "name": "computed-styles",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Get the computed styles of a DOM element in a cross browser consistent manner",
   "main": "dist/index.js",
-  "jsnext:main":  "src/index.js",
+  "jsnext:main": "src/index.js",
   "files": [
     "dist/",
     "src/"
