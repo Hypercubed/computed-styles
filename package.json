@@ -17,7 +17,8 @@
     "watch": "watch 'npm run build' src test",
     "test": "babel-node test/jsdom-index.js | tspec",
     "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md",
-    "zuul": "zuul --local 9966 --ui tape -- test/index.js"
+    "zuul": "zuul --local 9966 --ui tape -- test/index.js",
+    "version": "chg release -y && git add -A CHANGELOG.md"
   },
   "repository": {
     "type": "git",
