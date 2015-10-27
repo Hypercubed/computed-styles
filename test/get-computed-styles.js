@@ -11,7 +11,7 @@ const html = `
 
 var node;
 
-const t = document.createElement("div");
+const t = document.createElement('div');
 document.body.appendChild(t);
 
 function resetDOM() {
@@ -22,7 +22,7 @@ function resetDOM() {
 test('returns computedStyles', (t) => {
   t.plan(2);
 
-  resetDOM()
+  resetDOM();
   const styles = computedStyles(node);
 
   t.equal(styles.color, 'rgb(255, 0, 0)', 'inline');
@@ -33,7 +33,7 @@ test('returns computedStyles', (t) => {
 test('copies computedStyles to target object', (t) => {
   t.plan(2);
 
-  resetDOM()
+  resetDOM();
   const styles = {};
   computedStyles(node, styles);
 
@@ -45,7 +45,7 @@ test('copies computedStyles to target object', (t) => {
 test('throws if unexpected type', (t) => {
   t.plan(1);
 
-  resetDOM()
+  resetDOM();
 
   t.throws(function() {
     computedStyles(document.querySelector('#unknown'));

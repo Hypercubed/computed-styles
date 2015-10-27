@@ -1,6 +1,6 @@
 
 const isDefined = (a) => typeof a !== 'undefined';
-const isObject = (a) => { return a !== null && typeof a === 'object' };
+const isObject = (a) => { return a !== null && typeof a === 'object'; };
 
 // from https://github.com/npm-dom/is-dom/blob/master/index.js
 function isNode(val){

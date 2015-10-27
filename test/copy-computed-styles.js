@@ -32,7 +32,7 @@ const html = `
 
 var source, target;
 
-const t = document.createElement("div");
+const t = document.createElement('div');
 document.body.appendChild(t);
 
 function resetHTML() {
