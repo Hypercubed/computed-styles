@@ -36,8 +36,14 @@ function computedStyles(node, target = {}, styleList = true) {
 
   for(let i = 0, l = keysArray.length; i < l; i++){
     let key = keysArray[i];
+
+    let def = styleList === true || styleList[key];
+    if (def === false || !isDefined(def)) continue;  // copy never
+
     let value = useComputedStyles ? computed.getPropertyValue(key) : computed[key];
-    if (styleList === true || styleList[key] === true || value !== styleList[key] ) {
+    if (typeof value !== 'string' || value === '') continue; // invalid value
+
+    if (def === true || value !== def ) {  // styleList === true || styleList[key] === true || styleList[key] !== value
       target[key] = value;
     }
   }

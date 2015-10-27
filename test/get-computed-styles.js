@@ -3,8 +3,9 @@ import computedStyles from '../src/';
 
 const html = `
     <style>
-      div {
+      #node {
         font-family: sans-serif;
+        margin-left: 10px;
       }
     </style>
     <div id="node" style="color: rgb(255, 0, 0);"></div>`;
@@ -31,7 +32,7 @@ test('returns computedStyles', (t) => {
 });
 
 test('copies computedStyles to target object', (t) => {
-  t.plan(2);
+  t.plan(3);
 
   resetDOM();
   const styles = {};
@@ -39,6 +40,20 @@ test('copies computedStyles to target object', (t) => {
 
   t.equal(styles.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(styles['font-family'], 'sans-serif', 'css');
+  t.equal(styles['margin-left'], '10px', 'css');
+
+});
+
+test('copies computedStyles to target object, using whitelist', (t) => {
+  t.plan(3);
+
+  resetDOM();
+  const styles = {};
+  computedStyles(node, styles, { 'color': true, 'font-family': false, 'margin-left': '10px' });
+
+  t.equal(styles.color, 'rgb(255, 0, 0)', 'inline');
+  t.equal(styles['font-family'], undefined, 'css');
+  t.equal(styles['margin-left'], undefined, 'css');
 
 });
 
