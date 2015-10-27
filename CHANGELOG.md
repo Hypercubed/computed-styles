@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Fix for undefined values
+_(none)_
 
 --------------------
+
+## 1.1.1 (2015-10-28)
+* Fix for undefined values
 
 ## 1.1.0 (2015-10-27)
 * Can now specify target to copy computed styles to
