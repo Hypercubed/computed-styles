@@ -1,41 +1,48 @@
 
 const isDefined = (a) => typeof a !== 'undefined';
+const isObject = (a) => { return a !== null && typeof a === 'object' };
 
 // from https://github.com/npm-dom/is-dom/blob/master/index.js
 function isNode(val){
-  if (!val || typeof val !== 'object') return false;
-  if (window && 'object' == typeof window.Node) return val instanceof window.Node;
+  if (!isObject(val)) return false;
+  if (isDefined(window) && isObject(window.Node)) return val instanceof window.Node;
   return 'number' == typeof val.nodeType && 'string' == typeof val.nodeName;
 }
 
-// Convert computed styles to something we can iterate over
-// adapted from http://stackoverflow.com/questions/754607/can-jquery-get-all-css-styles-associated-with-an-element/6416527#6416527
-function convertComputedStyles(computed) {
-  const styles = {};
-  for(let i = 0, l = computed.length; i < l; i++){
-    var prop = computed[i];
-    styles[prop] = computed.getPropertyValue(prop);
-  }
-  return styles;
-}
+const useComputedStyles =  isDefined(window) && isDefined(window.getComputedStyle);
 
 /**
 * Returns a collection of CSS property-value pairs
-* @param  {element} node A DOM element
+* @param  {Element} node A DOM element to copy styles from
+* @param  {Object} [target] An optional object to copy styles to
+* @param {(Object|Boolean)} [default=true] A collection of CSS property-value pairs, false: copy none, true: copy all
 * @return {object} collection of CSS property-value pairs
 * @api public
 */
-function computedStyles(node) {
+function computedStyles(node, target = {}, styleList = true) {
   if (!isNode(node)) {
     throw new Error('parameter 1 is not of type \'Element\'');
   }
-  // adapted from https://github.com/angular/angular.js/issues/2866#issuecomment-31012434
-  if (isDefined(node.currentStyle)) {  //for old IE
-    return node.currentStyle;
-  } else if (isDefined(window.getComputedStyle)){  //for modern browsers
-    return convertComputedStyles(node.ownerDocument.defaultView.getComputedStyle(node,null));
+
+  if (styleList === false) return target;
+
+  if (useComputedStyles) {
+    var computed = node.ownerDocument.defaultView.getComputedStyle(node,null);
+    var keysArray = (styleList === true) ? computed : Object.keys(styleList);
+  } else {
+    var computed = isDefined(node.currentStyle) ? node.currentStyle : node.style;
+    var keysArray = (styleList === true) ? Object.keys(computed) : Object.keys(styleList);
   }
-  return node.style;
+
+  for(let i = 0, l = keysArray.length; i < l; i++){
+    let key = keysArray[i];
+    let value = useComputedStyles ? computed.getPropertyValue(key) : computed[key];
+    if (styleList === true || styleList[key] === true || value !== styleList[key] ) {
+      target[key] = value;
+    }
+  }
+
+  return target;
 }
 
 export default computedStyles;

@@ -2,15 +2,16 @@
   "name": "computed-styles",
   "version": "1.0.4",
   "description": "Get the computed styles of a DOM element in a cross browser consistent manner",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "files": [
     "dist/",
+    "lib/",
     "src/"
   ],
   "scripts": {
-    "compile": "babel src -d dist",
-    "build": "npm run compile",
+    "compile": "babel src -d lib",
+    "build": "npm run compile && npm run jsdoc2md",
     "lint": "eslint src test",
     "check": "npm run lint -s && dependency-check package.json --entry src",
     "watch": "watch 'npm run build' src test",

@@ -14,10 +14,31 @@ npm install computed-styles
 
 ## Usage
 
+### Get computed styles
+
 ```js
 import computedStyles from 'computed-styles';
 
 computedStyles(document.querySelector('#node')) // returns computed styles as an object
+```
+
+### Convert computed styles to inline styles
+
+```js
+import computedStyles from 'computed-styles';
+
+var node = document.querySelector('#node');
+computedStyles(node, node.styles);
+```
+
+### Copy computed styles to another element
+
+```js
+import computedStyles from 'computed-styles';
+
+var source = document.querySelector('#source');
+var target = document.querySelector('#target');
+computedStyles(source, target.styles);
 ```
 
 See [API](API.md)

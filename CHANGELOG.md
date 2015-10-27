@@ -2,7 +2,8 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Can now specify target to copy computed styles to
+* Can now specify which styles to copy or ignore
 
 --------------------
 
