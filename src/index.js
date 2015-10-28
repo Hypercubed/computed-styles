@@ -4,21 +4,21 @@ const isUndefined = (a) => typeof a === 'undefined';
 const isObject = (a) => { return a !== null && typeof a === 'object'; };
 
 // from https://github.com/npm-dom/is-dom/blob/master/index.js
-function isNode(val){
+function isNode (val) {
   if (!isObject(val)) return false;
   if (isDefined(window) && isObject(window.Node)) return val instanceof window.Node;
-  return 'number' == typeof val.nodeType && 'string' == typeof val.nodeName;
+  return typeof val.nodeType === 'number' && typeof val.nodeName === 'string';
 }
 
-const useComputedStyles =  isDefined(window) && isDefined(window.getComputedStyle);
+const useComputedStyles = isDefined(window) && isDefined(window.getComputedStyle);
 
 // Gets computed styles for an element
 // from https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
-function getComputedStyles(node) {
+function getComputedStyles (node) {
   if (useComputedStyles) {
     var view = node.ownerDocument.defaultView;
-    if ( !view.opener ) view = window;
-    return view.getComputedStyle(node,null);
+    if (!view.opener) view = window;
+    return view.getComputedStyle(node, null);
   } else {
     return node.currentStyle || node.style;
   }
@@ -32,7 +32,7 @@ function getComputedStyles(node) {
 * @return {object} collection of CSS property-value pairs
 * @api public
 */
-function computedStyles(node, target = {}, styleList = true) {
+function computedStyles (node, target = {}, styleList = true) {
   if (!isNode(node)) {
     throw new Error('parameter 1 is not of type \'Element\'');
   }
@@ -41,13 +41,14 @@ function computedStyles(node, target = {}, styleList = true) {
 
   var computed = getComputedStyles(node);
 
+  var keysArray;
   if (styleList === true) {
-    var keysArray = useComputedStyles ? computed : Object.keys(computed);
+    keysArray = useComputedStyles ? computed : Object.keys(computed);
   } else {
-    var keysArray = Object.keys(styleList);
+    keysArray = Object.keys(styleList);
   }
 
-  for(let i = 0, l = keysArray.length; i < l; i++){
+  for (let i = 0, l = keysArray.length; i < l; i++) {
     let key = keysArray[i];
 
     let def = styleList === true || styleList[key];
@@ -56,7 +57,7 @@ function computedStyles(node, target = {}, styleList = true) {
     let value = /* computed.getPropertyValue(key) || */ computed[key];  // using getPropertyValue causes error in IE11
     if (typeof value !== 'string' || value === '') continue; // invalid value
 
-    if (def === true || value !== def ) {  // styleList === true || styleList[key] === true || styleList[key] !== value
+    if (def === true || value !== def) {  // styleList === true || styleList[key] === true || styleList[key] !== value
       target[key] = value;
     }
   }
