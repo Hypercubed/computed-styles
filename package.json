@@ -15,7 +15,7 @@
     "lint": "eslint src test",
     "check": "npm run lint -s && dependency-check package.json --entry src",
     "watch": "watch 'npm run build' src test",
-    "test": "babel-node test/jsdom-index.js | tspec",
+    "test": "zuul --phantom --ui tape -- test/index.js | tap-spec",
     "jsdoc2md": "jsdoc-parse ./src/index.js | dmd > API.md",
     "zuul": "zuul --local 9966 --ui tape -- test/index.js",
     "version": "chg release -y && git add -A CHANGELOG.md"
@@ -44,7 +44,7 @@
     "dmd": "^1.2.0",
     "eslint": "*",
     "jsdoc-parse": "^1.1.1",
-    "jsdom": "^3.1.2",
+    "phantomjs": "^1.9.18",
     "tap-spec": "*",
     "tape": "*",
     "watch": "*",

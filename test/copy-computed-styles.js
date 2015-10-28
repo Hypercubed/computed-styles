@@ -30,122 +30,129 @@ const html = `
       </div>
     </div>`;
 
-var source, target;
-
 const t = document.createElement('div');
-document.body.appendChild(t);
 
-function resetHTML() {
+var source, target;
+function beforeEach() {
   t.innerHTML = html;
+  document.body.appendChild(t);
+
   source = document.querySelector('#node1');
   target = document.querySelector('#node2');
 }
 
-test('copy styles', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+function afterEach() {
+  document.body.removeChild(t);
+}
 
-  resetHTML();
+test('copy styles', (t) => {
+  t.plan(3);
+
+  beforeEach();
   computedStyles(source, target.style, true);
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(target.style['margin-left'], '10px', 'css');
-  global.isJSDOM || t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
+  t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('copy styles to inline', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, source.style, true);
 
   t.equal(source.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(source.style['margin-left'], '10px', 'css');
-  global.isJSDOM || t.equal(source.style['font-family'], 'sans-serif', 'css - inherited');
+  t.equal(source.style['font-family'], 'sans-serif', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('not copy if arguments[3] === false', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, false);
 
   t.equal(target.style.color, 'rgb(0, 0, 255)', 'inline');
   t.equal(target.style['margin-left'], '', 'css');
-  global.isJSDOM || t.equal(target.style['font-family'], '', 'css - inherited');
+  t.equal(target.style['font-family'], '', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('copy white listed styles', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, { 'color': true, 'font-family': true, 'margin-left': true });
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(target.style['margin-left'], '10px', 'css - not inherited');
-  global.isJSDOM || t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
+  t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('copy only white listed styles', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, { 'color': true, 'margin-left': true });
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
-  global.isJSDOM || t.equal(target.style['font-family'], '', 'css - inherited');
+  t.equal(target.style['font-family'], '', 'css - inherited');
   t.equal(target.style['margin-left'], '10px', 'css - not inherited');
+
+  afterEach();
 
 });
 
 test('copy only white listed styles, skip false', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, { 'color': true, 'font-family': false, 'margin-left': true  });
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(target.style['margin-left'], '10px', 'css - not inherited');
-  global.isJSDOM || t.equal(target.style['font-family'], '', 'css - inherited');
+  t.equal(target.style['font-family'], '', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('copy only white listed styles, skip undefined', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, { 'color': true, 'font-family': undefined, 'margin-left': undefined  });
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(target.style['margin-left'], '', 'css - not inherited');
-  global.isJSDOM || t.equal(target.style['font-family'], '', 'css - inherited');
+  t.equal(target.style['font-family'], '', 'css - inherited');
+
+  afterEach();
 
 });
 
 test('copy white listed styles, excluding defaults', (t) => {
-  t.plan(global.isJSDOM ? 2 : 3);
+  t.plan(3);
 
-  resetHTML();
+  beforeEach();
   computedStyles(source, target.style, { 'color': 'rgb(0,0,0)', 'font-family': 'serif', 'margin-left': '0px' });
 
   t.equal(target.style.color, 'rgb(255, 0, 0)', 'inline');
   t.equal(target.style['margin-left'], '10px', 'css - not inherited');
-  global.isJSDOM || t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
+  t.equal(target.style['font-family'], 'sans-serif', 'css - inherited');
 
-});
-
-test('throws if unexpected type', (t) => {
-  t.plan(1);
-
-  resetHTML();
-  const source = document.querySelector('#unknown');
-  const target = document.querySelector('#unknown2');
-
-  t.throws(function() {
-    computedStyles(source, target.style);
-  }, null, 'Throws if unexpected type');
+  afterEach();
 
 });
