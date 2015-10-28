@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Fix for IE11
+_(none)_
 
 --------------------
+
+## 1.1.2 (2015-10-28)
+* Fix for IE11
 
 ## 1.1.1 (2015-10-28)
 * Fix for undefined values
